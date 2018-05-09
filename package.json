@@ -1,0 +1,15 @@
+{
+  "name": "pinesql",
+  "version": "1.0.0",
+  "description": "Electron-based SQL editor",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "ivan770",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^2.0.0"
+  }
+}
