@@ -1,6 +1,7 @@
 const electron = require('electron')
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
+const ipc = require('electron').ipcMain
 const path = require('path')
 const url = require('url')
 
@@ -34,4 +35,12 @@ app.on('activate', function () {
   if (mainWindow === null) {
     createWindow()
   }
+})
+
+ipc.on('developer', function (event) {
+  mainWindow.webContents.openDevTools()
+})
+
+ipc.on('exit', function (event) {
+  app.exit()
 })

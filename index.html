@@ -10,8 +10,8 @@
         <header style="-webkit-app-region: no-drag;">
           <div class="row">
               <div class="input-field col s12">
-                  <input placeholder="PineSQL-friendly commands only" id="cmd" type="text" style="color: black; -webkit-app-region: no-drag;">
-                  <a class="waves-effect waves-light btn">Run</a>
+                  <input name="run" placeholder="PineSQL-friendly commands only" id="cmd" type="text" style="color: black; -webkit-app-region: no-drag;">
+                  <a class="waves-effect waves-light btn" id="run" name="run">Run</a>
               </div>
           </div>
         </header>
@@ -21,7 +21,6 @@
       <div class="row">
         <div class="input-field col s12">
           <textarea id="log" class="materialize-textarea"></textarea>
-          <label for="log">SQL log</label>
         </div>
       </div>
     </form>
@@ -29,6 +28,34 @@
         </main>
         <footer style="-webkit-app-region: no-drag">
         </footer>
+      <script src="js/base.js"></script>
+      <script>
+      const mysql = require('mysql');
+      const electron = require('electron')
+      const ipc = require('electron').ipcRenderer
+      const run = document.getElementById('run')
+      const cmd = document.getElementById('cmd')
+      const log = document.getElementById('log')
+
+      run.addEventListener('click', function (event) {
+        var split = cmd.value.split(" ");
+        switch (split[0]) {
+        case "exit":
+          ipc.send('exit');
+          break;
+        default:
+          appendLog("Error! Command not found.")
+          break;
+        }
+      })
+
+      document.addEventListener("keydown", function (e) {
+          if (e.which === 123) {
+              ipc.send('developer')
+            }
+      });
+      </script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>
 </html>
