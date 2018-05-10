@@ -7,7 +7,7 @@ const url = require('url')
 let mainWindow
 
 app.on('ready', () => {
-  mainWindow = new BrowserWindow({width: 800, height: 600, frame: false, maximizable: true, show: false})
+  mainWindow = new BrowserWindow({width: 800, height: 600, frame: false, maximizable: true, show: false, resizable: true})
 
   splash = new BrowserWindow({width: 800, height: 600, frame: false});
 

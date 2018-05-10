@@ -1,12 +1,34 @@
 <!DOCTYPE html>
-  <html>
+<html>
     <head>
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+        <link type="text/css" rel="stylesheet" href="css/index.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
     <body>
-      Coming soon...
+        <header style="-webkit-app-region: no-drag;">
+          <div class="row">
+              <div class="input-field col s12">
+                  <input placeholder="PineSQL-friendly commands only" id="cmd" type="text" style="color: black; -webkit-app-region: no-drag;">
+                  <a class="waves-effect waves-light btn">Run</a>
+              </div>
+          </div>
+        </header>
+        <main style="-webkit-app-region: drag;">
+          <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="log" class="materialize-textarea"></textarea>
+          <label for="log">SQL log</label>
+        </div>
+      </div>
+    </form>
+  </div>
+        </main>
+        <footer style="-webkit-app-region: no-drag">
+        </footer>
       <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>
-  </html>
+</html>
