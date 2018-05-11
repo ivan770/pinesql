@@ -4,11 +4,12 @@ const BrowserWindow = electron.BrowserWindow
 const ipc = require('electron').ipcMain
 const path = require('path')
 const url = require('url')
+const Menu = electron.Menu;
 
 let mainWindow
 
 app.on('ready', () => {
-  mainWindow = new BrowserWindow({width: 800, height: 600, frame: false, maximizable: true, show: false, resizable: true})
+  mainWindow = new BrowserWindow({width: 800, height: 600, maximizable: true, show: false, resizable: true})
 
   splash = new BrowserWindow({width: 800, height: 600, frame: false});
 
@@ -23,6 +24,26 @@ app.on('ready', () => {
     splash.destroy();
     mainWindow.show();
   });
+
+  const template = [
+    {
+      label: 'Edit',
+      submenu: [
+        {role: 'undo'},
+        {role: 'redo'},
+        {type: 'separator'},
+        {role: 'cut'},
+        {role: 'copy'},
+        {role: 'paste'},
+        {role: 'pasteandmatchstyle'},
+        {role: 'delete'},
+        {role: 'selectall'}
+      ]
+    }];
+
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+
 });
 
 app.on('window-all-closed', function () {
