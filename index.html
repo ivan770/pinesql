@@ -58,6 +58,12 @@
               ipc.send('developer')
             }
       });
+
+      cmd.addEventListener("keydown", function (e) {
+          if (e.which === 13) {
+              run.click()
+            }
+      });
       </script>
       <script src="js/commands.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
