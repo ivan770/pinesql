@@ -39,7 +39,26 @@ app.on('ready', () => {
         {role: 'delete'},
         {role: 'selectall'}
       ]
-    }];
+    },
+    {
+      label: 'Help',
+      submenu: [
+        {
+          label: 'GitHub page',
+          click () { require('electron').shell.openExternal('https://github.com/ivan770/pinesql') }
+        },
+        {
+          label: 'License',
+          click () { require('electron').shell.openExternal('https://raw.githubusercontent.com/ivan770/pinesql/master/LICENSE') }
+        },
+        {
+        type: 'separator'
+        },
+        {
+          label: 'Created by ivan770',
+          enabled: false
+        }]
+      }];
 
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
