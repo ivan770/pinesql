@@ -13,6 +13,9 @@
               <div class="input-field col s12">
                   <input name="run" placeholder="PineSQL-friendly commands only" id="cmd" type="text" style="color: black; -webkit-app-region: no-drag;">
                   <a class="waves-effect waves-light btn" id="run" name="run">Run</a>
+                  <div class="chip right" id="chip_cmd">
+    No command assigned
+  </div>
               </div>
           </div>
         </header>
@@ -36,21 +39,28 @@
       const run = document.getElementById('run')
       const cmd = document.getElementById('cmd')
       const log = document.getElementById('log')
+      const chip = document.getElementById('chip_cmd')
 
       run.addEventListener('click', function (event) {
         var split = cmd.value.split(" ");
         switch (split[0]) {
         case "connect":
-          appendLog("Connecting to " + split[1] + split[2] + split[3])
+          appendLog("Connecting to " + split[1] + " " + split[2])
           connect(split[1], split[2], split[3])
           break;
         case "exit":
           ipc.send('exit');
           break;
+        case "query":
+          appendLog("Executing " + split[4] + " " + "on " + split[1])
+          query(split[1], split[2], split[3], split[4])
+          break;
         default:
           appendLog("Error! Command not found.")
           break;
         }
+        cmd.value = ""
+        chip.innerText = "No command assigned"
       })
 
       document.addEventListener("keydown", function (e) {
@@ -62,6 +72,26 @@
       cmd.addEventListener("keydown", function (e) {
           if (e.which === 13) {
               run.click()
+            }
+      });
+
+      cmd.addEventListener("keydown", function (e) {
+          if (e.which === 32) {
+            var split = cmd.value.split(" ");
+            switch(split[0]) {
+              case "connect":
+                chip.innerText = "Connect to server"
+                break;
+              case "exit":
+                chip.innerText = "Quit PineSQL"
+                break;
+              case "query":
+                chip.innerText = "Execute SQL on database"
+                break;
+              default:
+                chip.innerText = "No command assigned"
+                break;
+              }
             }
       });
       </script>

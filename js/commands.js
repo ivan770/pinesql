@@ -7,7 +7,7 @@ function connect(host, user, password) {
 
   con.connect(function(err) {
     if (err){
-      appendLog(err.stack)
+      appendLog(err)
       appendLog("Check console for additional details (F12)")
       throw err;
     }else{
