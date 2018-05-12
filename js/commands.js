@@ -7,36 +7,65 @@ function connect(host, user, password) {
 
   con.connect(function(err) {
     if (err){
-      appendLog(err)
-      appendLog("Check console for additional details (F12)")
+      appendLog(err, "ERROR")
+      appendLog("Check console for additional details (F12)", "ERROR")
       throw err;
     }else{
-    appendLog("Connected")
+    appendLog("Connected", "CONNECT")
   }
   });
 }
 
 function query(host, user, password, query) {
-  var con = mysql.createConnection({
-    host: `${host}`,
-    user: `${user}`,
-    password: `${password}`
-  });
+    var con = mysql.createConnection({
+      host: `${host}`,
+      user: `${user}`,
+      password: `${password}`
+    });
 
   con.connect(function(err) {
     if (err){
-      appendLog(err)
-      appendLog("Check console for additional details (F12)")
+      appendLog(err, "ERROR")
+      appendLog("Check console for additional details (F12)", "ERROR")
       throw err;
     }else{
-    appendLog("Connected")
+    appendLog("Connected", "QUERY")
   con.query(query, function (err, result) {
     if (err){
-      appendLog(err)
-      appendLog("Check console for additional details (F12)")
+      appendLog(err, "ERROR")
+      appendLog("Check console for additional details (F12)", "ERROR")
       throw err;
     }else{
-      appendLog("Result(JSON): " + JSON.stringify(result));
+      appendLog("Result(JSON): " + JSON.stringify(result), "QUERY");
+    }
+      });
+    }
+  });
+}
+
+
+function querydb(host, user, password, query, database) {
+    var con = mysql.createConnection({
+      host: `${host}`,
+      user: `${user}`,
+      password: `${password}`,
+      database: `${database}`
+    });
+
+  con.connect(function(err) {
+    if (err){
+      appendLog(err, "ERROR")
+      appendLog("Check console for additional details (F12)", "ERROR")
+      throw err;
+    }else{
+    appendLog("Connected", "QUERYDB")
+  con.query(query, function (err, result) {
+    if (err){
+      appendLog(err, "ERROR")
+      appendLog("Check console for additional details (F12)", "ERROR")
+      throw err;
+    }else{
+      appendLog("Result(JSON): " + JSON.stringify(result), "QUERYDB");
     }
       });
     }

@@ -15,8 +15,8 @@
                   <input name="param" placeholder="Function parameter" id="param" type="text" style="color: black; display: none;">
                   <a class="waves-effect waves-light btn" id="run" name="run">Run</a>
                   <div class="chip right" id="chip_cmd" title="Use 'help' to get available commands">
-    No command assigned
-  </div>
+                    No command assigned
+                  </div>
               </div>
           </div>
         </header>
@@ -47,18 +47,22 @@
         var split = cmd.value.split(" ");
         switch (split[0]) {
         case "connect":
-          appendLog("Connecting to " + split[1] + " " + split[2])
+          appendLog("Connecting to " + split[1] + " " + split[2], "CONNECT")
           connect(split[1], split[2], split[3])
           break;
         case "exit":
           ipc.send('exit');
           break;
         case "query":
-          appendLog("Executing " + paraminput.value + " " + "on " + split[1])
+          appendLog("Executing " + paraminput.value + " " + "on " + split[1], "QUERY")
           query(split[1], split[2], split[3], paraminput.value)
           break;
+        case "querydb":
+          appendLog("Executing " + paraminput.value + " " + "on " + split[4] + " in " + split[1], "QUERYDB")
+          querydb(split[1], split[2], split[3], paraminput.value, split[4])
+          break;
         default:
-          appendLog("Error! Command not found.")
+          appendLog("Error! Command not found.", "ERROR")
           break;
         }
         cmd.value = ""
@@ -93,7 +97,12 @@
                 chip.innerText = "Quit PineSQL"
                 break;
               case "query":
-                chip.title = "'query hostname username password script'"
+                chip.title = "'query hostname username password'"
+                paraminput.style.display = "inline"
+                chip.innerText = "Execute SQL"
+                break;
+              case "querydb":
+                chip.title = "'querydb hostname username password database'"
                 paraminput.style.display = "inline"
                 chip.innerText = "Execute SQL on database"
                 break;

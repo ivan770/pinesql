@@ -1,5 +1,5 @@
-function appendLog(text) {
+function appendLog(text, prefix) {
   const currentText = log.value
-  log.value = text + "\n" + currentText
+  log.value = `<${prefix}> ${text}\n\n${currentText}`
   M.textareaAutoResize($('#log'));
 }
