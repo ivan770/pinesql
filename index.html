@@ -14,7 +14,7 @@
                   <input name="run" placeholder="PineSQL-friendly commands only" id="cmd" type="text" style="color: black; -webkit-app-region: no-drag;">
                   <input name="param" placeholder="Function parameter" id="param" type="text" style="color: black; display: none;">
                   <a class="waves-effect waves-light btn" id="run" name="run">Run</a>
-                  <div class="chip right" id="chip_cmd">
+                  <div class="chip right" id="chip_cmd" title="Use 'help' to get available commands">
     No command assigned
   </div>
               </div>
@@ -83,18 +83,22 @@
             var split = cmd.value.split(" ");
             switch(split[0]) {
               case "connect":
+                chip.title = "'connect hostname username password'"
                 paraminput.style.display = "none"
                 chip.innerText = "Connect to server"
                 break;
               case "exit":
+                chip.title = "'exit'"
                 paraminput.style.display = "none"
                 chip.innerText = "Quit PineSQL"
                 break;
               case "query":
+                chip.title = "'query hostname username password script'"
                 paraminput.style.display = "inline"
                 chip.innerText = "Execute SQL on database"
                 break;
               default:
+                chip.title = "Use 'help' to get available commands"
                 paraminput.style.display = "none"
                 chip.innerText = "No command assigned"
                 break;

@@ -36,7 +36,7 @@ function query(host, user, password, query) {
       appendLog("Check console for additional details (F12)")
       throw err;
     }else{
-      console.log("Result: " + result);
+      appendLog("Result(JSON): " + JSON.stringify(result));
     }
       });
     }
