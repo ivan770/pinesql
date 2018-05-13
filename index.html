@@ -61,6 +61,10 @@
           appendLog("Executing " + paraminput.value + " " + "on " + split[4] + " in " + split[1], "QUERYDB")
           querydb(split[1], split[2], split[3], paraminput.value, split[4])
           break;
+        case "ping":
+          appendLog("Sending ping to " + split[1] + " " + split[2], "CONNECT")
+          ping(split[1], split[2], split[3])
+          break;
         default:
           appendLog("Error! Command not found.", "ERROR")
           break;
@@ -78,6 +82,12 @@
       });
 
       cmd.addEventListener("keydown", function (e) {
+          if (e.which === 13) {
+              run.click()
+            }
+      });
+
+      paraminput.addEventListener("keydown", function (e) {
           if (e.which === 13) {
               run.click()
             }
@@ -105,6 +115,11 @@
                 chip.title = "'querydb hostname username password database'"
                 paraminput.style.display = "inline"
                 chip.innerText = "Execute SQL on database"
+                break;
+              case "ping":
+                chip.title = "'ping hostname username password'"
+                paraminput.style.display = "none"
+                chip.innerText = "Send ping to server"
                 break;
               default:
                 chip.title = "Use 'help' to get available commands"

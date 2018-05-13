@@ -71,3 +71,31 @@ function querydb(host, user, password, query, database) {
     }
   });
 }
+
+function ping(host, user, password) {
+  var con = mysql.createConnection({
+    host: `${host}`,
+    user: `${user}`,
+    password: `${password}`
+  });
+
+  con.connect(function(err) {
+    if (err){
+      appendLog(err, "ERROR")
+      appendLog("Check console for additional details (F12)", "ERROR")
+      throw err;
+    }else{
+    appendLog("Connected", "PING")
+  }
+  });
+
+  con.ping(function (err) {
+    if (err){
+      appendLog(err, "ERROR")
+      appendLog("Check console for additional details (F12)", "ERROR")
+      throw err;
+    }else{
+      appendLog("Server responded.", "PING");
+    }
+  })
+}
