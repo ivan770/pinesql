@@ -68,6 +68,7 @@
         cmd.value = ""
         paraminput.value = ""
         chip.innerText = "No command assigned"
+        chip.title = "Use 'help' to get available commands"
       })
 
       document.addEventListener("keydown", function (e) {
@@ -82,8 +83,7 @@
             }
       });
 
-      cmd.addEventListener("keydown", function (e) {
-          if (e.which === 32) {
+      cmd.addEventListener("keyup", function (e) {
             var split = cmd.value.split(" ");
             switch(split[0]) {
               case "connect":
@@ -111,7 +111,6 @@
                 paraminput.style.display = "none"
                 chip.innerText = "No command assigned"
                 break;
-              }
             }
       });
       </script>
