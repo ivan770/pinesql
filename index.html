@@ -13,7 +13,9 @@
               <div class="input-field col s12">
                   <input name="run" placeholder="PineSQL-friendly commands only" id="cmd" type="text" style="color: black; -webkit-app-region: no-drag;">
                   <input name="param" placeholder="Function parameter" id="param" type="text" style="color: black; display: none;">
+                  <input id="prevValue" name="prevValue" type="hidden">
                   <a class="waves-effect waves-light btn" id="run" name="run">Run</a>
+                  <a class="waves-effect waves-teal btn-flat" id="prevButton" name="prevButton">Previous command</a>
                   <div class="chip right" id="chip_cmd" title="Use 'help' to get available commands">
                     No command assigned
                   </div>
@@ -42,6 +44,8 @@
       const log = document.getElementById('log')
       const chip = document.getElementById('chip_cmd')
       const paraminput = document.getElementById('param')
+      const prevValue = document.getElementById('prevValue')
+      const prevButton = document.getElementById('prevButton')
 
       run.addEventListener('click', function (event) {
         var split = cmd.value.split(" ");
@@ -69,10 +73,15 @@
           appendLog("Error! Command not found.", "ERROR")
           break;
         }
+        prevValue.value = cmd.value;
         cmd.value = ""
         paraminput.value = ""
         chip.innerText = "No command assigned"
         chip.title = "Use 'help' to get available commands"
+      })
+
+      prevButton.addEventListener('click', function (event) {
+        cmd.value = prevValue.value
       })
 
       document.addEventListener("keydown", function (e) {
