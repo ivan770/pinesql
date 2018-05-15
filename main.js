@@ -13,11 +13,20 @@ app.on('ready', () => {
 
   splash = new BrowserWindow({width: 800, height: 600, frame: false});
 
+  assistantWin = new BrowserWindow({ width: 800, height: 600, show: false});
+
+  assistantWin.loadURL(`file://${__dirname}/construct.html`)
   splash.loadURL(`file://${__dirname}/splash.html`);
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 
   mainWindow.on('closed', function () {
     mainWindow = null
+    assistantWin.destroy();
+  })
+
+  assistantWin.on('close', function (event) {
+    assistantWin.hide()
+    event.preventDefault();
   })
 
   mainWindow.once('ready-to-show', () => {
@@ -86,6 +95,5 @@ ipc.on('exit', function (event) {
 })
 
 ipc.on('assistant', function (event) {
-   var assistantWin = new BrowserWindow({ width: 800, height: 600 });
-   assistantWin.loadURL(`file://${__dirname}/construct.html`)
+  assistantWin.show()
 })
