@@ -84,3 +84,8 @@ ipc.on('developer', function (event) {
 ipc.on('exit', function (event) {
   app.exit()
 })
+
+ipc.on('assistant', function (event) {
+   var assistantWin = new BrowserWindow({ width: 800, height: 600 });
+   assistantWin.loadURL(`file://${__dirname}/construct.html`)
+})
