@@ -98,6 +98,12 @@
             }
       });
 
+      cmd.addEventListener("keydown", function (e) {
+          if (e.which === 38) {
+              cmd.value = prevValue.value
+            }
+      });
+
       paraminput.addEventListener("keydown", function (e) {
           if (e.which === 13) {
               run.click()
