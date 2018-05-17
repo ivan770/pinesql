@@ -30,13 +30,22 @@ function query (host, user, password, query) {
       throw err
     } else {
       appendLog('Connected', 'QUERY')
-      con.query(query, function (err, result) {
+      con.ping(function (err) {
         if (err) {
           appendLog(err, 'ERROR')
           appendLog('Check console for additional details (F12)', 'ERROR')
           throw err
         } else {
-          appendLog('Result(JSON): ' + JSON.stringify(result), 'QUERY')
+          appendLog('Server responded.', 'PING')
+          con.query(query, function (err, result) {
+            if (err) {
+              appendLog(err, 'ERROR')
+              appendLog('Check console for additional details (F12)', 'ERROR')
+              throw err
+            } else {
+              appendLog('Result(JSON): ' + JSON.stringify(result), 'QUERY')
+            }
+          })
         }
       })
     }
@@ -58,13 +67,22 @@ function querydb (host, user, password, query, database) {
       throw err
     } else {
       appendLog('Connected', 'QUERYDB')
-      con.query(query, function (err, result) {
+      con.ping(function (err) {
         if (err) {
           appendLog(err, 'ERROR')
           appendLog('Check console for additional details (F12)', 'ERROR')
           throw err
         } else {
-          appendLog('Result(JSON): ' + JSON.stringify(result), 'QUERYDB')
+          appendLog('Server responded.', 'PING')
+          con.query(query, function (err, result) {
+            if (err) {
+              appendLog(err, 'ERROR')
+              appendLog('Check console for additional details (F12)', 'ERROR')
+              throw err
+            } else {
+              appendLog('Result(JSON): ' + JSON.stringify(result), 'QUERYDB')
+            }
+          })
         }
       })
     }

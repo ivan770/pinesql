@@ -16,7 +16,7 @@
                   <input id="prevValue" name="prevValue" type="hidden">
                   <a class="waves-effect waves-light btn" id="run" name="run">Run</a>
                   <a class="waves-effect waves-teal btn-flat" id="prevButton" name="prevButton">Previous command</a>
-                  <a class="waves-effect waves-teal btn-flat" id="assistantButton" name="assistantButton">Assistant</a>
+                  <!-- <a class="waves-effect waves-teal btn-flat" id="assistantButton" name="assistantButton">Assistant</a> -->
                   <div class="chip right" id="chip_cmd" title="Use 'help' to get available commands">
                     No command assigned
                   </div>
@@ -48,6 +48,9 @@
       const prevValue = document.getElementById('prevValue')
       const prevButton = document.getElementById('prevButton')
       const assistantButton = document.getElementById('assistantButton');
+      const pjson = require('./package.json');
+
+      console.log("PineSQL " + pjson.version)
 
       run.addEventListener('click', function (event) {
         var split = cmd.value.split(" ");
@@ -114,9 +117,9 @@
             }
       });
 
-      assistantButton.addEventListener("click" , function (e) {
+      /* assistantButton.addEventListener("click" , function (e) {
         ipc.send('assistant')
-      })
+      }) */
 
       cmd.addEventListener("keyup", function (e) {
             var split = cmd.value.split(" ");
