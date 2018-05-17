@@ -4,35 +4,35 @@ const BrowserWindow = electron.BrowserWindow
 const ipc = require('electron').ipcMain
 const path = require('path')
 const url = require('url')
-const Menu = electron.Menu;
+const Menu = electron.Menu
 
 let mainWindow
 
 app.on('ready', () => {
   mainWindow = new BrowserWindow({width: 800, height: 600, maximizable: true, show: false, resizable: true})
 
-  splash = new BrowserWindow({width: 800, height: 600, frame: false});
+  splash = new BrowserWindow({width: 800, height: 600, frame: false})
 
-  assistantWin = new BrowserWindow({ width: 800, height: 600, show: false});
+  assistantWin = new BrowserWindow({ width: 800, height: 600, show: false})
 
   assistantWin.loadURL(`file://${__dirname}/construct.html`)
-  splash.loadURL(`file://${__dirname}/splash.html`);
-  mainWindow.loadURL(`file://${__dirname}/index.html`);
+  splash.loadURL(`file://${__dirname}/splash.html`)
+  mainWindow.loadURL(`file://${__dirname}/index.html`)
 
   mainWindow.on('closed', function () {
     mainWindow = null
-    assistantWin.destroy();
+    assistantWin.destroy()
   })
 
   assistantWin.on('close', function (event) {
     assistantWin.hide()
-    event.preventDefault();
+    event.preventDefault()
   })
 
   mainWindow.once('ready-to-show', () => {
-    splash.destroy();
-    mainWindow.show();
-  });
+    splash.destroy()
+    mainWindow.show()
+  })
 
   const template = [
     {
@@ -61,18 +61,17 @@ app.on('ready', () => {
           click () { require('electron').shell.openExternal('https://raw.githubusercontent.com/ivan770/pinesql/master/LICENSE') }
         },
         {
-        type: 'separator'
+          type: 'separator'
         },
         {
           label: 'Created by ivan770',
           enabled: false
         }]
-      }];
+    }]
 
-  const menu = Menu.buildFromTemplate(template);
-  Menu.setApplicationMenu(menu);
-
-});
+  const menu = Menu.buildFromTemplate(template)
+  Menu.setApplicationMenu(menu)
+})
 
 app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') {

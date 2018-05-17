@@ -7,7 +7,8 @@
   "scripts": {
     "start": "electron .",
     "pack": "build --dir",
-    "dist": "build"
+    "dist": "build",
+    "standard" : "standard --fix"
   },
   "build": {
     "linux": {
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "electron": "^2.0.0",
-    "electron-builder": "^20.13.3"
+    "electron-builder": "^20.13.3",
+    "standard": "^11.0.1"
   }
 }
