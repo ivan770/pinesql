@@ -11,6 +11,9 @@
         <header>
           <div class="row">
               <div class="input-field col s12">
+                  <div id="ping">Connect to server first</div>
+                  <div class="divider"></div>
+                  <div class="row"></div>
                   <input name="run" placeholder="PineSQL-friendly commands only" id="cmd" type="text" style="color: black; -webkit-app-region: no-drag;">
                   <input name="param" placeholder="Function parameter" id="param" type="text" style="color: black; display: none;">
                   <input id="prevValue" name="prevValue" type="hidden">
@@ -47,7 +50,8 @@
       const paraminput = document.getElementById('param')
       const prevValue = document.getElementById('prevValue')
       const prevButton = document.getElementById('prevButton')
-      const assistantButton = document.getElementById('assistantButton');
+      const assistantButton = document.getElementById('assistantButton')
+      const pingObj = document.getElementById("ping")
       const pjson = require('./package.json');
 
       console.log("PineSQL " + pjson.version)
