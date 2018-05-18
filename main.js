@@ -9,90 +9,125 @@ const Menu = electron.Menu
 let mainWindow
 
 app.on('ready', () => {
-  mainWindow = new BrowserWindow({width: 800, height: 600, maximizable: true, show: false, resizable: true})
+    mainWindow = new BrowserWindow({
+        width: 800,
+        height: 600,
+        maximizable: true,
+        show: false,
+        resizable: true
+    })
 
-  splash = new BrowserWindow({width: 800, height: 600, frame: false})
+    splash = new BrowserWindow({
+        width: 800,
+        height: 600,
+        frame: false
+    })
 
-  assistantWin = new BrowserWindow({ width: 800, height: 600, show: false})
+    assistantWin = new BrowserWindow({
+        width: 800,
+        height: 600,
+        show: false
+    })
 
-  assistantWin.loadURL(`file://${__dirname}/construct.html`)
-  splash.loadURL(`file://${__dirname}/splash.html`)
-  mainWindow.loadURL(`file://${__dirname}/index.html`)
+    assistantWin.loadURL(`file://${__dirname}/construct.html`)
+    splash.loadURL(`file://${__dirname}/splash.html`)
+    mainWindow.loadURL(`file://${__dirname}/index.html`)
 
-  mainWindow.on('closed', function () {
-    mainWindow = null
-    assistantWin.destroy()
-  })
+    mainWindow.on('closed', function() {
+        mainWindow = null
+        assistantWin.destroy()
+    })
 
-  assistantWin.on('close', function (event) {
-    assistantWin.hide()
-    event.preventDefault()
-  })
+    assistantWin.on('close', function(event) {
+        assistantWin.hide()
+        event.preventDefault()
+    })
 
-  mainWindow.once('ready-to-show', () => {
-    splash.destroy()
-    mainWindow.show()
-  })
+    mainWindow.once('ready-to-show', () => {
+        splash.destroy()
+        mainWindow.show()
+    })
 
-  const template = [
-    {
-      label: 'Edit',
-      submenu: [
-        {role: 'undo'},
-        {role: 'redo'},
-        {type: 'separator'},
-        {role: 'cut'},
-        {role: 'copy'},
-        {role: 'paste'},
-        {role: 'pasteandmatchstyle'},
-        {role: 'delete'},
-        {role: 'selectall'}
-      ]
-    },
-    {
-      label: 'Help',
-      submenu: [
-        {
-          label: 'GitHub page',
-          click () { require('electron').shell.openExternal('https://github.com/ivan770/pinesql') }
+    const template = [{
+            label: 'Edit',
+            submenu: [{
+                    role: 'undo'
+                },
+                {
+                    role: 'redo'
+                },
+                {
+                    type: 'separator'
+                },
+                {
+                    role: 'cut'
+                },
+                {
+                    role: 'copy'
+                },
+                {
+                    role: 'paste'
+                },
+                {
+                    role: 'pasteandmatchstyle'
+                },
+                {
+                    role: 'delete'
+                },
+                {
+                    role: 'selectall'
+                }
+            ]
         },
         {
-          label: 'License',
-          click () { require('electron').shell.openExternal('https://raw.githubusercontent.com/ivan770/pinesql/master/LICENSE') }
-        },
-        {
-          type: 'separator'
-        },
-        {
-          label: 'Created by ivan770',
-          enabled: false
-        }]
-    }]
+            label: 'Help',
+            submenu: [{
+                    label: 'GitHub page',
+                    click() {
+                        require('electron').shell.openExternal('https://github.com/ivan770/pinesql')
+                    }
+                },
+                {
+                    label: 'License',
+                    click() {
+                        require('electron').shell.openExternal('https://raw.githubusercontent.com/ivan770/pinesql/master/LICENSE')
+                    }
+                },
+                {
+                    type: 'separator'
+                },
+                {
+                    label: 'Created by ivan770',
+                    enabled: false
+                }
+            ]
+        }
+    ]
 
-  const menu = Menu.buildFromTemplate(template)
-  Menu.setApplicationMenu(menu)
+    const menu = Menu.buildFromTemplate(template)
+    Menu.setApplicationMenu(menu)
 })
 
-app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+app.on('window-all-closed', function() {
+    if (process.platform !== 'darwin') {
+        app.quit()
+    }
 })
 
-app.on('activate', function () {
-  if (mainWindow === null) {
-    createWindow()
-  }
+app.on('activate', function() {
+    if (mainWindow === null) {
+        createWindow()
+    }
 })
 
-ipc.on('developer', function (event) {
-  mainWindow.webContents.openDevTools()
+ipc.on('developer', function(event) {
+    mainWindow.webContents.openDevTools()
 })
 
-ipc.on('exit', function (event) {
-  app.exit()
+ipc.on('exit', function(event) {
+    app.exit()
 })
 
-ipc.on('assistant', function (event) {
-  assistantWin.show()
+ipc.on('assistant', function(event) {
+    assistantWin.show()
 })

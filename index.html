@@ -1,174 +1,184 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
-        <link type="text/css" rel="stylesheet" href="css/index.css" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>PineSQL</title>
-    </head>
-    <body>
-        <header>
-          <div class="row">
-              <div class="input-field col s12">
-                  <div id="ping">Connect to server first</div>
-                  <div class="divider"></div>
-                  <div class="row"></div>
-                  <input name="run" placeholder="PineSQL-friendly commands only" id="cmd" type="text" style="color: black; -webkit-app-region: no-drag;">
-                  <input name="param" placeholder="Function parameter" id="param" type="text" style="color: black; display: none;">
-                  <input id="prevValue" name="prevValue" type="hidden">
-                  <a class="waves-effect waves-light btn" id="run" name="run">Run</a>
-                  <a class="waves-effect waves-teal btn-flat" id="prevButton" name="prevButton">Previous command</a>
-                  <!-- <a class="waves-effect waves-teal btn-flat" id="assistantButton" name="assistantButton">Assistant</a> -->
-                  <div class="chip right" id="chip_cmd" title="Use 'help' to get available commands">
+
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="css/index.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PineSQL</title>
+</head>
+
+<body>
+    <header>
+        <div class="row">
+            <div class="input-field col s12">
+                <div id="ping">Connect to server first</div>
+                <div class="divider"></div>
+                <div class="row"></div>
+                <input name="run" placeholder="PineSQL-friendly commands only" id="cmd" type="text" style="color: black; -webkit-app-region: no-drag;">
+                <input name="param" placeholder="Function parameter" id="param" type="text" style="color: black; display: none;">
+                <input id="prevValue" name="prevValue" type="hidden">
+                <a class="waves-effect waves-light btn" id="run" name="run">Run</a>
+                <a class="waves-effect waves-teal btn-flat" id="prevButton" name="prevButton">Previous command</a>
+                <!-- <a class="waves-effect waves-teal btn-flat" id="assistantButton" name="assistantButton">Assistant</a> -->
+                <div class="chip right" id="chip_cmd" title="Use 'help' to get available commands">
                     No command assigned
-                  </div>
-              </div>
-          </div>
-        </header>
-        <main>
-          <div class="row">
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field col s12">
-          <textarea id="log" class="materialize-textarea" readonly></textarea>
+                </div>
+            </div>
         </div>
-      </div>
-    </form>
-  </div>
-        </main>
-      <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-      <script src="js/base.js"></script>
-      <script>
-      const mysql = require('mysql')
-      const electron = require('electron')
-      const ipc = require('electron').ipcRenderer
-      const run = document.getElementById('run')
-      const cmd = document.getElementById('cmd')
-      const log = document.getElementById('log')
-      const chip = document.getElementById('chip_cmd')
-      const paraminput = document.getElementById('param')
-      const prevValue = document.getElementById('prevValue')
-      const prevButton = document.getElementById('prevButton')
-      const assistantButton = document.getElementById('assistantButton')
-      const pingObj = document.getElementById("ping")
-      const pjson = require('./package.json');
-
-      console.log("PineSQL " + pjson.version)
-
-      run.addEventListener('click', function (event) {
-        var split = cmd.value.split(" ");
-        switch (split[0]) {
-        case "connect":
-          appendLog("Connecting to " + split[1] + " " + split[2], "CONNECT")
-          connect(split[1], split[2], split[3])
-          break;
-        case "exit":
-          ipc.send('exit');
-          break;
-        case "query":
-          appendLog("Executing " + paraminput.value + " " + "on " + split[1], "QUERY")
-          query(split[1], split[2], split[3], paraminput.value)
-          break;
-        case "querydb":
-          appendLog("Executing " + paraminput.value + " " + "on " + split[4] + " in " + split[1], "QUERYDB")
-          querydb(split[1], split[2], split[3], paraminput.value, split[4])
-          break;
-        case "ping":
-          appendLog("Sending ping to " + split[1] + " " + split[2], "CONNECT")
-          ping(split[1], split[2], split[3])
-          break;
-        case "clear":
-          log.value = "";
-          M.textareaAutoResize($('#log'));
-          break;
-        default:
-          appendLog("Error! Command not found.", "ERROR")
-          break;
+    </header>
+    <main>
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="log" class="materialize-textarea" readonly></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
         }
-        prevValue.value = cmd.value;
-        cmd.value = ""
-        paraminput.value = ""
-        chip.innerText = "No command assigned"
-        chip.title = "Use 'help' to get available commands"
-      })
+    </script>
+    <script src="js/base.js"></script>
+    <script>
+        const mysql = require('mysql')
+        const electron = require('electron')
+        const ipc = require('electron').ipcRenderer
+        const run = document.getElementById('run')
+        const cmd = document.getElementById('cmd')
+        const log = document.getElementById('log')
+        const chip = document.getElementById('chip_cmd')
+        const paraminput = document.getElementById('param')
+        const prevValue = document.getElementById('prevValue')
+        const prevButton = document.getElementById('prevButton')
+        const assistantButton = document.getElementById('assistantButton')
+        const pingObj = document.getElementById("ping")
+        const pjson = require('./package.json');
 
-      prevButton.addEventListener('click', function (event) {
-        cmd.value = prevValue.value
-      })
+        console.log("PineSQL " + pjson.version)
 
-      document.addEventListener("keydown", function (e) {
-          if (e.which === 123) {
-              ipc.send('developer')
-            }
-      });
-
-      cmd.addEventListener("keydown", function (e) {
-          if (e.which === 13) {
-              run.click()
-            }
-      });
-
-      cmd.addEventListener("keydown", function (e) {
-          if (e.which === 38) {
-              cmd.value = prevValue.value
-            }
-      });
-
-      paraminput.addEventListener("keydown", function (e) {
-          if (e.which === 13) {
-              run.click()
-            }
-      });
-
-      /* assistantButton.addEventListener("click" , function (e) {
-        ipc.send('assistant')
-      }) */
-
-      cmd.addEventListener("keyup", function (e) {
+        run.addEventListener('click', function(event) {
             var split = cmd.value.split(" ");
-            switch(split[0]) {
-              case "connect":
-                chip.title = "'connect hostname username password'"
-                paraminput.style.display = "none"
-                chip.innerText = "Connect to server"
-                break;
-              case "exit":
-                chip.title = "'exit'"
-                paraminput.style.display = "none"
-                chip.innerText = "Quit PineSQL"
-                break;
-              case "query":
-                chip.title = "'query hostname username password'"
-                paraminput.style.display = "inline"
-                chip.innerText = "Execute SQL"
-                break;
-              case "querydb":
-                chip.title = "'querydb hostname username password database'"
-                paraminput.style.display = "inline"
-                chip.innerText = "Execute SQL on database"
-                break;
-              case "ping":
-                chip.title = "'ping hostname username password'"
-                paraminput.style.display = "none"
-                chip.innerText = "Send ping to server"
-                break;
-              case "clear":
-                chip.title = "'clear'"
-                paraminput.style.display = "none"
-                chip.innerText = "Clear logs"
-                break;
-              default:
-                chip.title = "Use 'help' to get available commands"
-                paraminput.style.display = "none"
-                chip.innerText = "No command assigned"
-                break;
+            switch (split[0]) {
+                case "connect":
+                    appendLog("Connecting to " + split[1] + " " + split[2], "CONNECT")
+                    connect(split[1], split[2], split[3])
+                    break;
+                case "exit":
+                    ipc.send('exit');
+                    break;
+                case "query":
+                    appendLog("Executing " + paraminput.value + " " + "on " + split[1], "QUERY")
+                    query(split[1], split[2], split[3], paraminput.value)
+                    break;
+                case "querydb":
+                    appendLog("Executing " + paraminput.value + " " + "on " + split[4] + " in " + split[1], "QUERYDB")
+                    querydb(split[1], split[2], split[3], paraminput.value, split[4])
+                    break;
+                case "ping":
+                    appendLog("Sending ping to " + split[1] + " " + split[2], "CONNECT")
+                    ping(split[1], split[2], split[3])
+                    break;
+                case "clear":
+                    log.value = "";
+                    M.textareaAutoResize($('#log'));
+                    break;
+                default:
+                    appendLog("Error! Command not found.", "ERROR")
+                    break;
             }
-      });
-      </script>
-      <script src="js/commands.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script type="text/javascript" src="js/materialize.min.js"></script>
-      <script>if (window.module) module = window.module;</script>
-    </body>
+            prevValue.value = cmd.value;
+            cmd.value = ""
+            paraminput.value = ""
+            chip.innerText = "No command assigned"
+            chip.title = "Use 'help' to get available commands"
+        })
+
+        prevButton.addEventListener('click', function(event) {
+            cmd.value = prevValue.value
+        })
+
+        document.addEventListener("keydown", function(e) {
+            if (e.which === 123) {
+                ipc.send('developer')
+            }
+        });
+
+        cmd.addEventListener("keydown", function(e) {
+            if (e.which === 13) {
+                run.click()
+            }
+        });
+
+        cmd.addEventListener("keydown", function(e) {
+            if (e.which === 38) {
+                cmd.value = prevValue.value
+            }
+        });
+
+        paraminput.addEventListener("keydown", function(e) {
+            if (e.which === 13) {
+                run.click()
+            }
+        });
+
+        /* assistantButton.addEventListener("click" , function (e) {
+          ipc.send('assistant')
+        }) */
+
+        cmd.addEventListener("keyup", function(e) {
+            var split = cmd.value.split(" ");
+            switch (split[0]) {
+                case "connect":
+                    chip.title = "'connect hostname username password'"
+                    paraminput.style.display = "none"
+                    chip.innerText = "Connect to server"
+                    break;
+                case "exit":
+                    chip.title = "'exit'"
+                    paraminput.style.display = "none"
+                    chip.innerText = "Quit PineSQL"
+                    break;
+                case "query":
+                    chip.title = "'query hostname username password'"
+                    paraminput.style.display = "inline"
+                    chip.innerText = "Execute SQL"
+                    break;
+                case "querydb":
+                    chip.title = "'querydb hostname username password database'"
+                    paraminput.style.display = "inline"
+                    chip.innerText = "Execute SQL on database"
+                    break;
+                case "ping":
+                    chip.title = "'ping hostname username password'"
+                    paraminput.style.display = "none"
+                    chip.innerText = "Send ping to server"
+                    break;
+                case "clear":
+                    chip.title = "'clear'"
+                    paraminput.style.display = "none"
+                    chip.innerText = "Clear logs"
+                    break;
+                default:
+                    chip.title = "Use 'help' to get available commands"
+                    paraminput.style.display = "none"
+                    chip.innerText = "No command assigned"
+                    break;
+            }
+        });
+    </script>
+    <script src="js/commands.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script>
+        if (window.module) module = window.module;
+    </script>
+</body>
+
 </html>
