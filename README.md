@@ -10,6 +10,7 @@ PineSQL is Electron-based SQL manager, which can help you manage your MySQL data
 
 # Credits
 ivan770 as [ivan770](https://github.com/ivan770/)
+
 Pinecone made by [Freepik](http://www.freepik.com/) from [Flaticon](http://www.flaticon.com/)
 
 ### Installation (old way)
