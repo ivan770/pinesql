@@ -8,7 +8,11 @@ PineSQL is Electron-based SQL manager, which can help you manage your MySQL data
 2. Open it, wait until installation ends.
 3. App should open automatically, and add shortcut to Start Menu and desktop.
 
-# Installation (old way)
+# Credits
+ivan770 as [ivan770](https://github.com/ivan770/)
+Pinecone made by [Freepik](http://www.freepik.com/) from [Flaticon](http://www.flaticon.com/)
+
+### Installation (old way)
 1. Download source-code from GitHub
 2. Use `npm i` and wait until package installation ends
 3. Finally, execute `npm start`.

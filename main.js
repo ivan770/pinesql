@@ -14,19 +14,22 @@ app.on('ready', () => {
         height: 600,
         maximizable: true,
         show: false,
-        resizable: true
+        resizable: true,
+        icon: path.join(__dirname, 'img/icon.png')
     })
 
     splash = new BrowserWindow({
         width: 800,
         height: 600,
-        frame: false
+        frame: false,
+        icon: path.join(__dirname, 'img/icon.png')
     })
 
     assistantWin = new BrowserWindow({
         width: 800,
         height: 600,
-        show: false
+        show: false,
+        icon: path.join(__dirname, 'img/icon.png')
     })
 
     assistantWin.loadURL(`file://${__dirname}/construct.html`)
