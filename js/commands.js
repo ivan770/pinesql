@@ -1,4 +1,4 @@
-function connect(host, user, password) {
+/* function connect(host, user, password) {
     var con = mysql.createConnection({
         host: `${host}`,
         user: `${user}`,
@@ -14,13 +14,14 @@ function connect(host, user, password) {
             appendLog('Connected', 'CONNECT')
         }
     })
-}
+} */
 
-function query(host, user, password, query) {
+function query(host, user, password, query, port) {
     var con = mysql.createConnection({
         host: `${host}`,
         user: `${user}`,
-        password: `${password}`
+        password: `${password}`,
+        port: `${port}`
     })
 
     con.connect(function(err) {
@@ -55,12 +56,13 @@ function query(host, user, password, query) {
     })
 }
 
-function querydb(host, user, password, query, database) {
+function querydb(host, user, password, query, database, port) {
     var con = mysql.createConnection({
         host: `${host}`,
         user: `${user}`,
         password: `${password}`,
-        database: `${database}`
+        database: `${database}`,
+        port: `${port}`
     })
 
     con.connect(function(err) {
@@ -95,11 +97,12 @@ function querydb(host, user, password, query, database) {
     })
 }
 
-function ping(host, user, password) {
+function ping(host, user, password, port) {
     var con = mysql.createConnection({
         host: `${host}`,
         user: `${user}`,
-        password: `${password}`
+        password: `${password}`,
+        port: `${port}`
     })
 
     con.connect(function(err) {

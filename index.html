@@ -64,7 +64,9 @@
         console.log("PineSQL " + pjson.version)
 
         run.addEventListener('click', function(event) {
-            var split = cmd.value.split(" ");
+            const split = cmd.value.split(" ");
+            let port
+            let portSplit
             switch (split[0]) {
                 case "connect":
                     appendLog("Command 'connect' is deprecated, use 'ping' instead", "ERROR")
@@ -73,16 +75,22 @@
                     ipc.send('exit');
                     break;
                 case "query":
-                    appendLog("Executing " + paraminput.value + " " + "on " + split[1], "QUERY")
-                    query(split[1], split[2], split[3], paraminput.value)
+                    portSplit = split[1].split(":")
+                    port = typeof portSplit[1] === 'undefined' ? 3306 : portSplit[1];
+                    appendLog("Executing " + paraminput.value + " " + "on " + portSplit[0] + ":" + port, "QUERY")
+                    query(portSplit[0], split[2], split[3], paraminput.value, port)
                     break;
                 case "querydb":
-                    appendLog("Executing " + paraminput.value + " " + "on " + split[4] + " in " + split[1], "QUERYDB")
-                    querydb(split[1], split[2], split[3], paraminput.value, split[4])
+                    portSplit = split[1].split(":")
+                    port = typeof portSplit[1] === 'undefined' ? 3306 : portSplit[1];
+                    appendLog("Executing " + paraminput.value + " " + "on " + split[4] + " in " + portSplit[0] + ":" + port, "QUERYDB")
+                    querydb(portSplit[0], split[2], split[3], paraminput.value, split[4], port)
                     break;
                 case "ping":
-                    appendLog("Sending ping to " + split[1] + " " + split[2], "CONNECT")
-                    ping(split[1], split[2], split[3])
+                    portSplit = split[1].split(":")
+                    port = typeof portSplit[1] === 'undefined' ? 3306 : portSplit[1];
+                    appendLog("Sending ping to " + portSplit[0] + ":" + port + " " + split[2], "CONNECT")
+                    ping(portSplit[0], split[2], split[3], port)
                     break;
                 case "clear":
                     log.value = "";
