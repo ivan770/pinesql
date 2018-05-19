@@ -67,8 +67,7 @@
             var split = cmd.value.split(" ");
             switch (split[0]) {
                 case "connect":
-                    appendLog("Connecting to " + split[1] + " " + split[2], "CONNECT")
-                    connect(split[1], split[2], split[3])
+                    appendLog("Command 'connect' is deprecated, use 'ping' instead", "ERROR")
                     break;
                 case "exit":
                     ipc.send('exit');
@@ -136,11 +135,6 @@
         cmd.addEventListener("keyup", function(e) {
             var split = cmd.value.split(" ");
             switch (split[0]) {
-                case "connect":
-                    chip.title = "'connect hostname username password'"
-                    paraminput.style.display = "none"
-                    chip.innerText = "Connect to server"
-                    break;
                 case "exit":
                     chip.title = "'exit'"
                     paraminput.style.display = "none"
