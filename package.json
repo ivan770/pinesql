@@ -18,7 +18,8 @@
       ]
     },
     "win": {
-      "target": "NSIS"
+      "target": "NSIS",
+      "icon": "img/icon.ico"
     }
   },
   "author": "ivan770",
