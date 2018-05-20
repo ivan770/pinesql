@@ -84,10 +84,10 @@
                 case "querydb":
                     portSplit = split[1].split(":")
                     port = typeof portSplit[1] === 'undefined' ? 3306 : portSplit[1];
-                    if (split[5] == "build"){
-                      build = 1
+                    if (split[5] == "build") {
+                        build = 1
                     } else {
-                      build = 0
+                        build = 0
                     }
                     appendLog("Executing " + paraminput.value + " " + "on " + split[4] + " in " + portSplit[0] + ":" + port, "QUERYDB")
                     querydb(portSplit[0], split[2], split[3], paraminput.value, split[4], port, build)

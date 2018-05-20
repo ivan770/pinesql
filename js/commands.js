@@ -15,7 +15,6 @@
         }
     })
 } */
-
 function query(host, user, password, query, port) {
     var con = mysql.createConnection({
         host: `${host}`,
@@ -89,15 +88,15 @@ function querydb(host, user, password, query, database, port, build) {
                             throw err
                         } else {
                             if (build == 1) {
-                              Object.keys(result).forEach(function(key) {
-                                var row = result[key];
-		                            Object.keys(row).forEach(function(key){
-   			                            appendLog(key + ' // ' + row[key], "BUILD");
-		                              });
-                              });
+                                Object.keys(result).forEach(function(key) {
+                                    var row = result[key];
+                                    Object.keys(row).forEach(function(key) {
+                                        appendLog(key + ' // ' + row[key], "BUILD");
+                                    });
+                                });
                             } else {
-                            appendLog('Result(JSON): ' + JSON.stringify(result), 'QUERYDB')
-                          }
+                                appendLog('Result(JSON): ' + JSON.stringify(result), 'QUERYDB')
+                            }
                         }
                     })
                 }
