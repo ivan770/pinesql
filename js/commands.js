@@ -56,7 +56,7 @@ function query(host, user, password, query, port) {
     })
 }
 
-function querydb(host, user, password, query, database, port) {
+function querydb(host, user, password, query, database, port, build) {
     var con = mysql.createConnection({
         host: `${host}`,
         user: `${user}`,
@@ -88,7 +88,16 @@ function querydb(host, user, password, query, database, port) {
                             appendLog('Check console for additional details (F12)', 'ERROR')
                             throw err
                         } else {
+                            if (build == 1) {
+                              Object.keys(result).forEach(function(key) {
+                                var row = result[key];
+		                            Object.keys(row).forEach(function(key){
+   			                            appendLog(key + ' // ' + row[key], "BUILD");
+		                              });
+                              });
+                            } else {
                             appendLog('Result(JSON): ' + JSON.stringify(result), 'QUERYDB')
+                          }
                         }
                     })
                 }
