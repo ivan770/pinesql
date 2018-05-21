@@ -1,7 +1,7 @@
 # PineSQL
 PineSQL is Electron-based SQL manager, which can help you manage your MySQL database, execute remote code, and use constructor to build requests (coming soon).
 
-![Screenshot](https://raw.githubusercontent.com/ivan770/pinesql/master/img/screenshot2.png)
+![Screenshot](https://raw.githubusercontent.com/ivan770/pinesql/master/img/screenshot3.png)
 
 # Commands and syntax
 Commands are available from [this](https://github.com/ivan770/pinesql/wiki/PineSQL-friendly-commands) page.
