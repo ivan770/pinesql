@@ -3,6 +3,13 @@ PineSQL is Electron-based SQL manager, which can help you manage your MySQL data
 
 ![Screenshot](https://raw.githubusercontent.com/ivan770/pinesql/master/img/screenshot2.png)
 
+# Commands and syntax
+Commands are available from [this](https://github.com/ivan770/pinesql/wiki/PineSQL-friendly-commands) page.
+
+To use port, different then 3306, use `hostname:port`, e.g `ping localhost:1234 admin admin`
+
+'querydb' supports building response in logs, using `build` parameter. e.g `querydb localhost admin admin db build`
+
 # Installation
 1. Download installer from [releases](https://github.com/ivan770/pinesql/releases)
 2. Open it, wait until installation ends.
