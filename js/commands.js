@@ -88,12 +88,15 @@ function querydb(host, user, password, query, database, port, build) {
                             throw err
                         } else {
                             if (build == 1) {
+                              ipc.send("build_clear")
                                 Object.keys(result).forEach(function(key) {
                                     var row = result[key];
                                     Object.keys(row).forEach(function(key) {
-                                        appendLog(key + ' // ' + row[key], "BUILD");
+                                        // appendLog(key + ' // ' + row[key], "BUILD");
+                                        ipc.send("build", key, row[key])
                                     });
                                 });
+                                appendLog("Build completed!", "BUILD")
                             } else {
                                 appendLog('Result(JSON): ' + JSON.stringify(result), 'QUERYDB')
                             }

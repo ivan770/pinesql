@@ -131,6 +131,14 @@ ipc.on('exit', function(event) {
     app.exit()
 })
 
-ipc.on('assistant', function(event) {
+ipc.on('buildOpen', function(event) {
     assistantWin.show()
+})
+
+ipc.on('build', function(event, arg1, arg2) {
+  assistantWin.webContents.send('build', arg1, arg2);
+})
+
+ipc.on('build_clear', function(event) {
+  assistantWin.webContents.send('clear');
 })

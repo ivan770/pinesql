@@ -21,7 +21,7 @@
                 <input id="prevValue" name="prevValue" type="hidden">
                 <a class="waves-effect waves-light btn" id="run" name="run">Run</a>
                 <a class="waves-effect waves-teal btn-flat" id="prevButton" name="prevButton">Previous command</a>
-                <!-- <a class="waves-effect waves-teal btn-flat" id="assistantButton" name="assistantButton">Assistant</a> -->
+                <a class="waves-effect waves-teal btn-flat" id="buildButton" name="buildButton">Build result</a>
                 <div class="chip right" id="chip_cmd" title="Use 'help' to get available commands">
                     No command assigned
                 </div>
@@ -57,7 +57,7 @@
         const paraminput = document.getElementById('param')
         const prevValue = document.getElementById('prevValue')
         const prevButton = document.getElementById('prevButton')
-        const assistantButton = document.getElementById('assistantButton')
+        const buildButton = document.getElementById('buildButton')
         const pingObj = document.getElementById("ping")
         const pjson = require('./package.json');
 
@@ -142,9 +142,9 @@
             }
         });
 
-        /* assistantButton.addEventListener("click" , function (e) {
-          ipc.send('assistant')
-        }) */
+        buildButton.addEventListener("click" , function (e) {
+          ipc.send('buildOpen')
+        })
 
         cmd.addEventListener("keyup", function(e) {
             var split = cmd.value.split(" ");
