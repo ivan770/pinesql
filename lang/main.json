@@ -1,0 +1,6 @@
+{
+  "list": ["en-US"],
+  "packages": {
+    "en-US": "en-US.json"
+  }
+}

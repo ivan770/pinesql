@@ -142,3 +142,7 @@ ipc.on('build', function(event, arg1, arg2) {
 ipc.on('build_clear', function(event) {
   assistantWin.webContents.send('clear');
 })
+
+ipc.on('lang_detect', (event) => {
+   event.sender.send('lang_detect_reply', app.getLocale())
+ })
