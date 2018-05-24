@@ -116,6 +116,7 @@
 
         prevButton.addEventListener('click', function(event) {
             cmd.value = prevValue.value
+            detect()
         })
 
         document.addEventListener("keydown", function(e) {
@@ -146,41 +147,43 @@
           ipc.send('buildOpen')
         })
 
-        cmd.addEventListener("keyup", function(e) {
-            var split = cmd.value.split(" ");
-            switch (split[0]) {
-                case "exit":
-                    chip.title = "'exit'"
-                    paraminput.style.display = "none"
-                    chip.innerText = "Quit PineSQL"
-                    break;
-                case "query":
-                    chip.title = "'query hostname username password'"
-                    paraminput.style.display = "inline"
-                    chip.innerText = "Execute SQL"
-                    break;
-                case "querydb":
-                    chip.title = "'querydb hostname username password database build'"
-                    paraminput.style.display = "inline"
-                    chip.innerText = "Execute SQL on database"
-                    break;
-                case "ping":
-                    chip.title = "'ping hostname username password'"
-                    paraminput.style.display = "none"
-                    chip.innerText = "Send ping to server"
-                    break;
-                case "clear":
-                    chip.title = "'clear'"
-                    paraminput.style.display = "none"
-                    chip.innerText = "Clear logs"
-                    break;
-                default:
-                    chip.title = "Use 'help' to get available commands"
-                    paraminput.style.display = "none"
-                    chip.innerText = "No command assigned"
-                    break;
-            }
-        });
+        function detect() {
+          var split = cmd.value.split(" ");
+          switch (split[0]) {
+              case "exit":
+                  chip.title = "'exit'"
+                  paraminput.style.display = "none"
+                  chip.innerText = "Quit PineSQL"
+                  break;
+              case "query":
+                  chip.title = "'query hostname username password'"
+                  paraminput.style.display = "inline"
+                  chip.innerText = "Execute SQL"
+                  break;
+              case "querydb":
+                  chip.title = "'querydb hostname username password database build'"
+                  paraminput.style.display = "inline"
+                  chip.innerText = "Execute SQL on database"
+                  break;
+              case "ping":
+                  chip.title = "'ping hostname username password'"
+                  paraminput.style.display = "none"
+                  chip.innerText = "Send ping to server"
+                  break;
+              case "clear":
+                  chip.title = "'clear'"
+                  paraminput.style.display = "none"
+                  chip.innerText = "Clear logs"
+                  break;
+              default:
+                  chip.title = "Use 'help' to get available commands"
+                  paraminput.style.display = "none"
+                  chip.innerText = "No command assigned"
+                  break;
+          }
+        }
+
+        cmd.addEventListener("keyup", detect);
     </script>
     <script src="js/commands.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
