@@ -13,7 +13,7 @@
     <header>
         <div class="row">
             <div class="input-field col s12">
-                <div id="ping">Connect to server first</div>
+                <div><div id="ping">Connect to server first</div><div>Execute a function to measure time</div></div>
                 <div class="divider"></div>
                 <div class="row"></div>
                 <input name="run" placeholder="PineSQL-friendly commands only" id="cmd" type="text" style="color: black; -webkit-app-region: no-drag;">
@@ -60,7 +60,7 @@
         const buildButton = document.getElementById('buildButton')
         const pingObj = document.getElementById("ping")
         const pjson = require('./package.json');
-        const lang_settings = require('./lang/main.json')
+        /* const lang_settings = require('./lang/main.json')
 
         let lang
 
@@ -74,7 +74,7 @@
             lang = require('./lang/en-US.json')
             console.log("Using default language: en-US")
           }
-        })
+        }) */
 
         console.log("PineSQL " + pjson.version)
 
