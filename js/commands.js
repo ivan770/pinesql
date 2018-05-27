@@ -16,6 +16,9 @@
     })
 } */
 function query(host, user, password, query, port) {
+    let exec0
+    let exec1
+    exec0 = performance.now()
     var con = mysql.createConnection({
         host: `${host}`,
         user: `${user}`,
@@ -47,6 +50,8 @@ function query(host, user, password, query, port) {
                             throw err
                         } else {
                             appendLog('Result(JSON): ' + JSON.stringify(result), 'QUERY')
+                            exec1 = performance.now()
+                            exectime.innerText = "query: " + Math.round((exec1 - exec0)) + " ms";
                         }
                     })
                 }
@@ -56,6 +61,9 @@ function query(host, user, password, query, port) {
 }
 
 function querydb(host, user, password, query, database, port, build) {
+  let exec0
+  let exec1
+  exec0 = performance.now()
     var con = mysql.createConnection({
         host: `${host}`,
         user: `${user}`,
@@ -97,8 +105,12 @@ function querydb(host, user, password, query, database, port, build) {
                                     });
                                 });
                                 appendLog("Build completed!", "BUILD")
+                                exec1 = performance.now()
+                                exectime.innerText = "query: " + Math.round((exec1 - exec0)) + " ms";
                             } else {
                                 appendLog('Result(JSON): ' + JSON.stringify(result), 'QUERYDB')
+                                exec1 = performance.now()
+                                exectime.innerText = "querydb: " + Math.round((exec1 - exec0)) + " ms";
                             }
                         }
                     })
@@ -109,6 +121,9 @@ function querydb(host, user, password, query, database, port, build) {
 }
 
 function ping(host, user, password, port) {
+  let exec0
+  let exec1
+  exec0 = performance.now()
     var con = mysql.createConnection({
         host: `${host}`,
         user: `${user}`,
@@ -133,6 +148,8 @@ function ping(host, user, password, port) {
                     var t1 = performance.now();
                     appendLog('Server responded.', 'PING')
                     pingObj.innerText = "Ping: " + Math.round((t1 - t0)) + " ms";
+                    exec1 = performance.now()
+                    exectime.innerText = "ping: " + Math.round((exec1 - exec0)) + " ms";
                 }
             })
         }
