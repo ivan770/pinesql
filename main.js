@@ -32,17 +32,31 @@ app.on('ready', () => {
         icon: path.join(__dirname, 'img/icon.png')
     })
 
+    settingsWin = new BrowserWindow({
+      width: 800,
+      height: 600,
+      show: false,
+      icon: path.join(__dirname, 'img/icon.png')
+    })
+
     assistantWin.loadURL(`file://${__dirname}/construct.html`)
     splash.loadURL(`file://${__dirname}/splash.html`)
     mainWindow.loadURL(`file://${__dirname}/index.html`)
+    settingsWin.loadURL(`file://${__dirname}/settings.html`)
 
     mainWindow.on('closed', function() {
         mainWindow = null
         assistantWin.destroy()
+        settingsWin.destroy()
     })
 
     assistantWin.on('close', function(event) {
         assistantWin.hide()
+        event.preventDefault()
+    })
+
+    settingsWin.on('close', function(event) {
+        settingsWin.hide()
         event.preventDefault()
     })
 
@@ -52,33 +66,12 @@ app.on('ready', () => {
     })
 
     const template = [{
-            label: 'Edit',
+            label: 'File',
             submenu: [{
-                    role: 'undo'
-                },
-                {
-                    role: 'redo'
-                },
-                {
-                    type: 'separator'
-                },
-                {
-                    role: 'cut'
-                },
-                {
-                    role: 'copy'
-                },
-                {
-                    role: 'paste'
-                },
-                {
-                    role: 'pasteandmatchstyle'
-                },
-                {
-                    role: 'delete'
-                },
-                {
-                    role: 'selectall'
+                label: 'Settings',
+                  click() {
+                    settingsWin.show()
+                  }
                 }
             ]
         },
@@ -107,8 +100,9 @@ app.on('ready', () => {
         }
     ]
 
+    Menu.setApplicationMenu(null)
     const menu = Menu.buildFromTemplate(template)
-    Menu.setApplicationMenu(menu)
+    mainWindow.setMenu(menu)
 })
 
 app.on('window-all-closed', function() {
