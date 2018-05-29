@@ -5,6 +5,7 @@ const ipc = require('electron').ipcMain
 const path = require('path')
 const url = require('url')
 const Menu = electron.Menu
+const settings = require('electron-settings');
 
 let mainWindow
 
@@ -63,6 +64,12 @@ app.on('ready', () => {
     mainWindow.once('ready-to-show', () => {
         splash.destroy()
         mainWindow.show()
+        if(settings.has('settings_build') === false){
+          settings.set('settings_build', true)
+        }
+        if(settings.has('settings_functiontime') === false){
+          settings.set('settings_functiontime', true)
+        }
     })
 
     const template = [{
