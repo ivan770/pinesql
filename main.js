@@ -126,6 +126,7 @@ app.on('activate', function() {
 
 ipc.on('developer', function(event) {
     mainWindow.webContents.openDevTools()
+    settingsWin.webContents.openDevTools()
 })
 
 ipc.on('exit', function(event) {

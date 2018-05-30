@@ -50,6 +50,7 @@
         const mysql = require('mysql')
         const electron = require('electron')
         const ipc = require('electron').ipcRenderer
+        const settings = require('electron-settings')
         const run = document.getElementById('run')
         const cmd = document.getElementById('cmd')
         const log = document.getElementById('log')
@@ -200,6 +201,16 @@
         }
 
         cmd.addEventListener("keyup", detect);
+
+        if(settings.has('settings_build') === true){
+          if(typeof settings.get('settings_build') === "boolean"){
+            if(settings.get('settings_build') === true){
+              buildButton.style.display = "inline"
+            } else {
+              buildButton.style.display = "none"
+            }
+          }
+        }
     </script>
     <script src="js/commands.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

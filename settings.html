@@ -49,6 +49,17 @@
       <script>
       const electron = require('electron')
       const settings = require('electron-settings')
+      const settings_build_check = document.getElementById("settings_build")
+
+      if(settings.has('settings_build') === true){
+        if(typeof settings.get('settings_build') === "boolean"){
+          if(settings.get('settings_build') === true){
+            settings_build_check.checked = "checked"
+          } else {
+            settings_build_check.checked = ""
+          }
+        }
+      }
 
       function settings_set(name, id){
         settings.set(name, document.getElementById(id).checked)
