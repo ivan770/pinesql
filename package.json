@@ -25,7 +25,8 @@
   "author": "ivan770",
   "license": "MIT",
   "dependencies": {
-    "mysql": "^2.15.0"
+    "mysql": "^2.15.0",
+    "electron-settings": "^3.2.0"
   },
   "devDependencies": {
     "electron": "^2.0.0",
