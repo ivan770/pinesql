@@ -50,6 +50,7 @@
       const electron = require('electron')
       const settings = require('electron-settings')
       const settings_build_check = document.getElementById("settings_build")
+      const settings_functiontime_check = document.getElementById("settings_functiontime")
 
       if(settings.has('settings_build') === true){
         if(typeof settings.get('settings_build') === "boolean"){
@@ -57,6 +58,16 @@
             settings_build_check.checked = "checked"
           } else {
             settings_build_check.checked = ""
+          }
+        }
+      }
+
+      if(settings.has('settings_functiontime') === true){
+        if(typeof settings.get('settings_functiontime') === "boolean"){
+          if(settings.get('settings_functiontime') === true){
+            settings_functiontime_check.checked = "checked"
+          } else {
+            settings_functiontime_check.checked = ""
           }
         }
       }

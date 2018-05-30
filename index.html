@@ -211,6 +211,16 @@
             }
           }
         }
+
+        if(settings.has('settings_functiontime') === true){
+          if(typeof settings.get('settings_functiontime') === "boolean"){
+            if(settings.get('settings_functiontime') === true){
+              exectime.style.display = "inline"
+            } else {
+              exectime.style.display = "none"
+            }
+          }
+        }
     </script>
     <script src="js/commands.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
