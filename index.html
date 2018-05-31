@@ -136,11 +136,11 @@
             detect()
         })
 
-        document.addEventListener("keydown", function(e) {
+        /* document.addEventListener("keydown", function(e) {
             if (e.which === 123) {
                 ipc.send('developer')
             }
-        });
+        }); */
 
         cmd.addEventListener("keydown", function(e) {
             if (e.which === 13) {
@@ -218,6 +218,14 @@
               exectime.style.display = "inline"
             } else {
               exectime.style.display = "none"
+            }
+          }
+        }
+
+        if(settings.has('settings_developer') === true){
+          if(typeof settings.get('settings_developer') === "boolean"){
+            if(settings.get('settings_developer') === true){
+              ipc.send('developer')
             }
           }
         }

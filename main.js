@@ -70,6 +70,9 @@ app.on('ready', () => {
         if(settings.has('settings_functiontime') === false){
           settings.set('settings_functiontime', true)
         }
+        if(settings.has('settings_developer') === false){
+          settings.set('settings_developer', false)
+        }
     })
 
     const template = [{
