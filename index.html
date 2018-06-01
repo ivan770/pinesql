@@ -50,6 +50,8 @@
         const mysql = require('mysql')
         const electron = require('electron')
         const ipc = require('electron').ipcRenderer
+        const request = require('request')
+        const compareVersions = require('compare-versions');
         const settings = require('electron-settings')
         const run = document.getElementById('run')
         const cmd = document.getElementById('cmd')
