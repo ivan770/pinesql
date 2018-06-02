@@ -123,6 +123,9 @@
                     log.value = "";
                     M.textareaAutoResize($('#log'));
                     break;
+                case "help":
+                    electron.shell.openExternal("https://github.com/ivan770/pinesql/wiki/PineSQL-friendly-commands")
+                    break;
                 default:
                     appendLog("Error! Command not found.", "ERROR")
                     break;
@@ -195,6 +198,11 @@
                   chip.title = "'clear'"
                   paraminput.style.display = "none"
                   chip.innerText = "Clear logs"
+                  break;
+              case "help":
+                  chip.title = "'help'"
+                  paraminput.style.display = "none"
+                  chip.innerText = "Open help page"
                   break;
               default:
                   chip.title = "Use 'help' to get available commands"
