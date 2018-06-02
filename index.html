@@ -82,6 +82,8 @@
 
         console.log("PineSQL " + pjson.version)
 
+        updateCheck()
+
         run.addEventListener('click', function(event) {
             const split = cmd.value.split(" ");
             let port
