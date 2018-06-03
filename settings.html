@@ -86,35 +86,23 @@
       const applycard = document.getElementById('apply')
       const settings_developer_check = document.getElementById("settings_developer")
 
-      if(settings.has('settings_build') === true){
-        if(typeof settings.get('settings_build') === "boolean"){
-          if(settings.get('settings_build') === true){
+      if(settings.has('settings_build') === true && typeof settings.get('settings_build') === "boolean" && settings.get('settings_build') === true){
             settings_build_check.checked = "checked"
           } else {
             settings_build_check.checked = ""
           }
-        }
-      }
 
-      if(settings.has('settings_functiontime') === true){
-        if(typeof settings.get('settings_functiontime') === "boolean"){
-          if(settings.get('settings_functiontime') === true){
+      if(settings.has('settings_functiontime') === true && typeof settings.get('settings_functiontime') === "boolean" && settings.get('settings_functiontime') === true){
             settings_functiontime_check.checked = "checked"
           } else {
             settings_functiontime_check.checked = ""
           }
-        }
-      }
 
-      if(settings.has('settings_developer') === true){
-        if(typeof settings.get('settings_developer') === "boolean"){
-          if(settings.get('settings_developer') === true){
+      if(settings.has('settings_developer') === true && typeof settings.get('settings_developer') === "boolean" && settings.get('settings_developer') === true){
             settings_developer_check.checked = "checked"
           } else {
             settings_developer_check.checked = ""
           }
-        }
-      }
 
       function settings_set(name, id){
         settings.set(name, document.getElementById(id).checked)
