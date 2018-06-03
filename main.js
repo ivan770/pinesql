@@ -40,15 +40,24 @@ app.on('ready', () => {
       icon: path.join(__dirname, 'img/icon.png')
     })
 
+    aboutWin = new BrowserWindow({
+      width: 800,
+      height: 600,
+      show: false,
+      icon: path.join(__dirname, 'img/icon.png')
+    })
+
     assistantWin.loadURL(`file://${__dirname}/construct.html`)
     splash.loadURL(`file://${__dirname}/splash.html`)
     mainWindow.loadURL(`file://${__dirname}/index.html`)
     settingsWin.loadURL(`file://${__dirname}/settings.html`)
+    aboutWin.loadURL(`file://${__dirname}/about.html`)
 
     mainWindow.on('closed', function() {
         mainWindow = null
         assistantWin.destroy()
         settingsWin.destroy()
+        aboutWin.destroy()
     })
 
     assistantWin.on('close', function(event) {
@@ -58,6 +67,11 @@ app.on('ready', () => {
 
     settingsWin.on('close', function(event) {
         settingsWin.hide()
+        event.preventDefault()
+    })
+
+    aboutWin.on('close', function(event) {
+        aboutWin.hide()
         event.preventDefault()
     })
 
@@ -82,7 +96,13 @@ app.on('ready', () => {
                   click() {
                     settingsWin.show()
                   }
-                }
+                },
+                {
+                    label: 'About',
+                      click() {
+                        aboutWin.show()
+                      }
+                    }
             ]
         },
         {
@@ -98,13 +118,6 @@ app.on('ready', () => {
                     click() {
                         require('electron').shell.openExternal('https://raw.githubusercontent.com/ivan770/pinesql/master/LICENSE')
                     }
-                },
-                {
-                    type: 'separator'
-                },
-                {
-                    label: 'Created by ivan770',
-                    enabled: false
                 }
             ]
         }

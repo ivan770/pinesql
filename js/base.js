@@ -15,6 +15,8 @@ function updateCheck(){
           if (compareVersions(`${pjson.version}`, `${JSON.parse(body).tag_name}`) == -1){
             appendLog(`New version available: ${JSON.parse(body).tag_name}`, "UPDATE")
           }
+        } else {
+          appendLog("Connection error", "UPDATE")
         }
       });
 }
