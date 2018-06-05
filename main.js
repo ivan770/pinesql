@@ -161,6 +161,10 @@ ipc.on('build_clear', function(event) {
   assistantWin.webContents.send('clear');
 })
 
+ipc.on('update', function(event, version) {
+    settingsWin.webContents.send('update', version);
+  })
+
 ipc.on('lang_detect', (event) => {
    event.sender.send('lang_detect_reply', app.getLocale())
  })

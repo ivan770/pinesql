@@ -15,6 +15,7 @@ function updateCheck(){
           if (compareVersions(`${pjson.version}`, `${JSON.parse(body).tag_name}`) == -1){
             appendLog(`New version available: ${JSON.parse(body).tag_name}`, "UPDATE")
             appendLog(`Changes: \n${JSON.parse(body).body}`, "UPDATE")
+            ipc.send("update", JSON.parse(body).tag_name)
           }
         } else {
           appendLog("Connection error", "UPDATE")

@@ -7,7 +7,22 @@
     </head>
     <body>
 
-  <div class="row" id="apply" style="display: none;">
+
+      
+    <div class="row" id="updatecard" style="display: none;">
+      <div class="col s12 m12">
+        <div class="card green darken-3">
+          <div class="card-content white-text">
+            <span class="card-title">Update available</span>
+            <p id="desc"></p>
+          </div>
+          <div class="card-action">
+            <a id="link">Update</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="apply" style="display: none;">
     <div class="col s12 m12">
       <div class="card green darken-3">
         <div class="card-content white-text">
@@ -80,11 +95,15 @@
       </div>
       <script>
       const electron = require('electron')
+      const ipc = require('electron').ipcRenderer
       const settings = require('electron-settings')
       const settings_build_check = document.getElementById("settings_build")
       const settings_functiontime_check = document.getElementById("settings_functiontime")
       const applycard = document.getElementById('apply')
       const settings_developer_check = document.getElementById("settings_developer")
+      const update_card = document.getElementById("updatecard")
+      const update_desc = document.getElementById("desc")
+      const update_link = document.getElementById("link")
 
       if(settings.has('settings_build') === true){
         if(typeof settings.get('settings_build') === "boolean"){
@@ -122,6 +141,12 @@
       function apply(){
         applycard.style.display = "inline"
       }
+
+      ipc.on('update', function(event, version) {
+        updatecard.style.display = "inline"
+        update_desc.innerText = `New version available: ${version}`
+        update_link.onclick = function() { electron.shell.openExternal('https://github.com/ivan770/pinesql/releases') }
+      })
       </script>
       <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>
