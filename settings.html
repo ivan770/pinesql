@@ -37,6 +37,27 @@
         <div class="col s12 m12">
           <div class="card blue-grey darken-1">
             <div class="card-content white-text">
+              <span class="card-title">Check updates</span>
+              <p>Check updates on startup</p>
+            </div>
+            <div class="card-action">
+              <div class="switch">
+                <label>
+                  Disable
+                  <input type="checkbox" checked="checked" id="settings_update" onclick="settings_set('settings_update', 'settings_update'); apply()">
+                  <span class="lever"></span>
+                  Enable
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s12 m12">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
               <span class="card-title">Show "Build result" button</span>
               <p>Show/hide "Build result" button on main screen</p>
             </div>
@@ -101,6 +122,7 @@
       const settings_functiontime_check = document.getElementById("settings_functiontime")
       const applycard = document.getElementById('apply')
       const settings_developer_check = document.getElementById("settings_developer")
+      const settings_update_check = document.getElementById("settings_update")
       const update_card = document.getElementById("updatecard")
       const update_desc = document.getElementById("desc")
       const update_link = document.getElementById("link")
@@ -132,6 +154,15 @@
           }
         }
       }
+      if(settings.has('settings_update') === true){
+        if(typeof settings.get('settings_update') === "boolean"){
+          if(settings.get('settings_update') === true){
+            settings_update_check.checked = "checked"
+          } else {
+            settings_update_check.checked = ""
+          }
+        }
+      }
 
       function settings_set(name, id){
         settings.set(name, document.getElementById(id).checked)
@@ -142,11 +173,11 @@
         applycard.style.display = "inline"
       }
 
-      ipc.on('update', function(event, version) {
+      /* ipc.on('update', function(event, version) {
         updatecard.style.display = "inline"
         update_desc.innerText = `New version available: ${version}`
         update_link.onclick = function() { electron.shell.openExternal('https://github.com/ivan770/pinesql/releases') }
-      })
+      }) */
       </script>
       <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>

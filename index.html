@@ -82,8 +82,6 @@
 
         console.log("PineSQL " + pjson.version)
 
-        updateCheck()
-
         run.addEventListener('click', function(event) {
             const split = cmd.value.split(" ");
             let port
@@ -234,6 +232,14 @@
           if(typeof settings.get('settings_developer') === "boolean"){
             if(settings.get('settings_developer') === true){
               ipc.send('developer')
+            }
+          }
+        }
+
+        if(settings.has('settings_update') === true){
+          if(typeof settings.get('settings_update') === "boolean"){
+            if(settings.get('settings_update') === true){
+                updateCheck()
             }
           }
         }

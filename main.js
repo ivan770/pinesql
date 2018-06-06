@@ -10,6 +10,19 @@ const settings = require('electron-settings');
 let mainWindow
 
 app.on('ready', () => {
+    if(settings.has('settings_build') === false){
+        settings.set('settings_build', true)
+      }
+      if(settings.has('settings_functiontime') === false){
+        settings.set('settings_functiontime', true)
+      }
+      if(settings.has('settings_developer') === false){
+        settings.set('settings_developer', false)
+      }
+      if(settings.has('settings_update') === false){
+        settings.set('settings_update', true)
+      }
+      
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
@@ -78,15 +91,6 @@ app.on('ready', () => {
     mainWindow.once('ready-to-show', () => {
         splash.destroy()
         mainWindow.show()
-        if(settings.has('settings_build') === false){
-          settings.set('settings_build', true)
-        }
-        if(settings.has('settings_functiontime') === false){
-          settings.set('settings_functiontime', true)
-        }
-        if(settings.has('settings_developer') === false){
-          settings.set('settings_developer', false)
-        }
     })
 
     const template = [{
@@ -161,9 +165,9 @@ ipc.on('build_clear', function(event) {
   assistantWin.webContents.send('clear');
 })
 
-ipc.on('update', function(event, version) {
+/* ipc.on('update', function(event, version) {
     settingsWin.webContents.send('update', version);
-  })
+  }) */
 
 ipc.on('lang_detect', (event) => {
    event.sender.send('lang_detect_reply', app.getLocale())
