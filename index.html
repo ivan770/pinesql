@@ -253,7 +253,16 @@
   
         for (let f of e.dataTransfer.files) {
             if(f.path.slice((f.path.lastIndexOf(".") - 1 >>> 0) + 2) === "psql"){
-                console.log(fs.readFileSync(f.path).toString());
+                if(f.size < 2048){
+                    if(typeof JSON.parse(fs.readFileSync(f.path).toString()).main === "undefined"){
+                        appendLog("'main' empty", "SCRIPT")
+                    } else {
+                        cmd.value = JSON.parse(fs.readFileSync(f.path).toString()).main
+                        detect()
+                    }
+                } else {
+                    appendLog("Too large file", "SCRIPT")
+                }
             } else {
                 appendLog("Only .psql files supported", "SCRIPT")
             }
