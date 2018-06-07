@@ -53,6 +53,7 @@
         const request = require('request')
         const compareVersions = require('compare-versions');
         const settings = require('electron-settings')
+        const fs = require('fs'); 
         const run = document.getElementById('run')
         const cmd = document.getElementById('cmd')
         const log = document.getElementById('log')
@@ -245,6 +246,23 @@
         }
 
         cmd.addEventListener("keyup", detect);
+
+        document.addEventListener('drop', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+  
+        for (let f of e.dataTransfer.files) {
+            if(f.path.slice((f.path.lastIndexOf(".") - 1 >>> 0) + 2) === "psql"){
+                console.log(fs.readFileSync(f.path).toString());
+            } else {
+                appendLog("Only .psql files supported", "SCRIPT")
+            }
+            }
+        });
+        document.addEventListener('dragover', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        });
     </script>
     <script src="js/commands.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
