@@ -254,10 +254,11 @@
         for (let f of e.dataTransfer.files) {
             if(f.path.slice((f.path.lastIndexOf(".") - 1 >>> 0) + 2) === "psql"){
                 if(f.size < 2048){
-                    if(typeof JSON.parse(fs.readFileSync(f.path).toString()).main === "undefined"){
-                        appendLog("'main' empty", "SCRIPT")
+                    if(typeof JSON.parse(fs.readFileSync(f.path).toString()).main === "undefined" || typeof JSON.parse(fs.readFileSync(f.path).toString()).param === "undefined"){
+                        appendLog("'main' or 'param' empty", "SCRIPT")
                     } else {
                         cmd.value = JSON.parse(fs.readFileSync(f.path).toString()).main
+                        paraminput.value = JSON.parse(fs.readFileSync(f.path).toString()).param
                         detect()
                     }
                 } else {
