@@ -25,14 +25,14 @@
   "author": "ivan770",
   "license": "MIT",
   "dependencies": {
-    "compare-versions": "^3.2.1",
+    "compare-versions": "^3.3.0",
     "electron-settings": "^3.2.0",
     "mysql": "^2.15.0",
     "request": "^2.87.0"
   },
   "devDependencies": {
-    "electron": "^2.0.0",
-    "electron-builder": "^20.13.3",
+    "electron": "^2.0.2",
+    "electron-builder": "^20.15.3",
     "electron-settings": "^3.2.0"
   }
 }
