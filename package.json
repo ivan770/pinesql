@@ -1,6 +1,6 @@
 {
   "name": "pinesql",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Electron-based SQL editor",
   "productName": "PineSQL",
   "main": "./main.js",
