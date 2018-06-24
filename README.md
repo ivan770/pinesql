@@ -8,7 +8,7 @@ Commands are available from [this](https://github.com/ivan770/pinesql/wiki/PineS
 
 To use port, different then 3306, use `hostname:port`, e.g `ping localhost:1234 admin admin`
 
-'querydb' supports building response in logs, using `build` parameter. e.g `querydb localhost admin admin db build`
+'querydb' supports building response, using `build` parameter. e.g `querydb localhost admin admin db build`
 
 # Installation
 1. Download installer from [releases](https://github.com/ivan770/pinesql/releases)
