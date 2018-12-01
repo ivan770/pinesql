@@ -96,14 +96,8 @@ function querydb(host, user, password, query, database, port, build) {
                             throw err
                         } else {
                             if (build == 1) {
-                              ipc.send("build_clear")
-                                Object.keys(result).forEach(function(key) {
-                                    var row = result[key];
-                                    Object.keys(row).forEach(function(key) {
-                                        // appendLog(key + ' // ' + row[key], "BUILD");
-                                        ipc.send("build", key, row[key])
-                                    });
-                                });
+                                ipc.send("build_clear")
+                                ipc.send("build", result);
                                 appendLog("Build completed!", "BUILD")
                                 exec1 = performance.now()
                                 exectime.innerText = "query: " + Math.round((exec1 - exec0)) + " ms";
